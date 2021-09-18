@@ -1,24 +1,30 @@
 (function() {
   var questions = [{
-    question: "Climate change bad",
-    choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    question: "Canada’s anti-hate speech laws infringe on free speech rights.",
+    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }, {
-    question: "Climate change bad",
-    choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    question: "There should be more federal regulations over what Canadians can say online.",
+    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }, {
-    question: "Climate change bad",
-    choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    question: "The federal government should be providing more financial relief to Canadians who lost their jobs during the pandemic.",
+    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }, {
-    question: "Climate change bad",
-    choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    question: "The government should provide Universal Basic Income to all Canadians.",
+    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }, {
-    question: "Climate change bad",
-    choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    question: "There should not be any new oil pipelines developed in Canada.",
+    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }];
   
-  var questionCounter = 0; 
-  var selections = []; // provided answers
-  var quiz = $('#quiz'); 
+  var questionCounter = 0; //Tracks question number
+  var selections = []; //Array containing user choices
+  var quiz = $('#quiz'); //Quiz div object
+
+  var lpc = [0,3,1,1,0];
+  var cpc = [3,0,0,0,0];
+  var ndp = [0,3,3,3,0];
+  var gpc = [0,3,3,3,0];
+  var bq = [0,2,1,3,0];
   
   // Display initial question
   displayNext();
@@ -143,6 +149,14 @@
       }
     });
   }
+
+  function compareToParty(party) {
+    var totalDistance = 0;
+    for (var i = 0; i < selections.length; i++) {
+      totalDistance += Math.abs(selections[i] - party[i])
+    }
+    return totalDistance;
+  }
   
   // Computes score and returns a paragraph element to be displayed
   function displayScore() {
@@ -154,9 +168,19 @@
         numCorrect++;
       }
     }
-    
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
+
+    var largestDistance = 0;
+    for (var i = 0; i < selections.length; i++) {
+      largestDistance += (Math.abs(selections[i] - 2) + 2);
+    }
+
+    var comparedLPC = (Math.round((1 - (compareToParty(lpc) / largestDistance)) * 100));
+    var comparedCPC = (Math.round((1 - (compareToParty(cpc) / largestDistance)) * 100));
+    var comparedNDP = (Math.round((1 - (compareToParty(ndp) / largestDistance)) * 100));
+    var comparedGPC = (Math.round((1 - (compareToParty(gpc) / largestDistance)) * 100));
+    var comparedBQ = (Math.round((1 - (compareToParty(bq) / largestDistance)) * 100));
+
+    score.append('LPC: ' + comparedLPC + ' CPC: ' + comparedCPC + ' NDP: ' + comparedNDP + ' GPC: ' + comparedGPC + ' BQ: ' + comparedBQ);
     return score;
   }
 })();
