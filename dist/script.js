@@ -16,9 +16,9 @@
     choices: ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
   }];
   
-  var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
-  var quiz = $('#quiz'); //Quiz div object
+  var questionCounter = 0; 
+  var selections = []; // provided answers
+  var quiz = $('#quiz'); 
   
   // Display initial question
   displayNext();
