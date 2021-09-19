@@ -79,56 +79,8 @@ body {
     color: #0099ff;
 }
 
-.toggle-button {
-    position: absolute;
-    top: 40px;
-    right: 50px;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 50px;
-    height: 31px;
-}
 
-.toggle-button .bar {
-    height: 3px;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-}
 
-@media(max-width: 800px){
-    .navbar{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .toggle-button {
-        display: flex;
-    }
-
-    .links {
-        display: none;
-        width: 100%;
-    }
-
-    .links ul{
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .links ul li{
-        text-align: center;
-    }
-    
-    .links ul li a{
-        padding: .5rem 1rem;
-    }
-    
-    .links.active{
-        display: flex;
-    }
-}
 
 .main-area{
     width: 100%;
