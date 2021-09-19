@@ -188,6 +188,8 @@
           } else if(questionsAnswered === 0){
             
             $('#prev').hide();
+            $('#return').hide();
+            $('#start').hide();
             $('#next').show();
           }
         } else {
@@ -196,6 +198,7 @@
           $('#next').hide();
           $('#prev').hide();
           $('#start').show();
+          $('#return').show();
         }
       });
     }
@@ -229,8 +232,31 @@
       var comparedNDP = (Math.round((1 - (compareToParty(ndp) / largestDistance)) * 100));
       var comparedGPC = (Math.round((1 - (compareToParty(gpc) / largestDistance)) * 100));
       var comparedBQ = (Math.round((1 - (compareToParty(bq) / largestDistance)) * 100));
-  
-      score.append('LPC: ' + comparedLPC + ' CPC: ' + comparedCPC + ' NDP: ' + comparedNDP + ' GPC: ' + comparedGPC + ' BQ: ' + comparedBQ);
+
+      var bestMatch = Math.max(comparedLPC, comparedCPC, comparedNDP, comparedGPC, comparedBQ);
+
+      switch (bestMatch) {
+        case comparedLPC:
+            score.append('The Liberal Party is the best match! Your views are ' + comparedLPC + "% similar.");
+            break;
+        case comparedCPC:
+            score.append('The Conservative Party is the best match! Your views are ' + comparedCPC + "% similar.");
+            break;
+        case comparedNDP:
+            score.append('The New Democratic Party is the best match! Your views are ' + comparedNDP + "% similar.");
+            break;
+        case comparedGPC:
+            score.append('The Green Party is the best match! Your views are ' + comparedGPC + "% similar.");
+            break;
+        case comparedBQ:
+            score.append('The Bloc Quebecois is the best match! Your views are ' + comparedBQ + "% similar.");
+            break;
+        default:
+            score.append('LPC: ' + comparedLPC + ' CPC: ' + comparedCPC + ' NDP: ' + comparedNDP + ' GPC: ' + comparedGPC + ' BQ: ' + comparedBQ);
+            break
+      }
+      
       return score;
     }
+
   })();
