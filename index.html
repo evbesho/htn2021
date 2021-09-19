@@ -1,27 +1,65 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="wedth=device-width, inital-scale=1.0">
-            <link rel="stylesheet" href="styles.css">
-            <title>Politics or sumn</title>
+<html lang="en">
 
-        </head>
-        <body>
-            <div class="container">
-                <h1>Party Alignment Quiz</h1>
-                <h2><em>Get informed before the Election</em></h2>
-                <div class="image">
-                    <img src="electionpic.jpeg" alt="Candidates">
-                </div>
-                <p>
-                    I dont know yet. It'll probably say something like "this website is made to 
-                    inform Canadians on political issues and the vaarious stances that parties take. 
-                    Being uninformed is a large problem amongst the new generation of voters in Canada.
-                     This website creates and easy way to get informed on all of the leading parties 
-                     in preparation for the election on Sunday?"
-                </p>
-                <a href="#" class="btn">Start Quiz</a>
+<head>
+    <meta charset="UTF-8">
+    <title> Election website </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" title="style" />
+    <script src="script.js" defer></script>
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="page-top">
+      <nav class="navbar">
+            <div class="logo">
+                <a href="#page-top">ELECTION DAY: SEPTEMBER 20, 2021</a>
             </div>
-        </body>
-    </html>
+            <div class="links">
+                <ul>
+                    <li><a href="#quiz">Quiz</a></li>
+                    <li><a href="#references">References</a></li>
+                </ul>
+            </div>
+        </nav>
+    <div class="main-area">
+        <img src="electionpic.jpeg" alt="Election" class="responsive" width="600" height="400"> 
+        <h1>Where do you stand?</h1>
+    </div>
+    <div class="content-area">
+        <div class="container" id="quiz">
+            <br>
+            <h2>Need help deciding?</h2>
+            <p>Election day is approaching quickly, yet many voters are struggling to decide 
+                which ballot to cast when the day comes. Making an educated vote has always 
+                been a challenging task, but the spontaneity of a snap election and the chaos 
+                of the ongoing COVID-19 pandemic make the political climate in Canada even more 
+                difficult to comprehend. With this in mind, we created a quiz that can help voters 
+                determine which parties their political views align with the most. However, it 
+                must be noted that the results of a short quiz cannot compare to the value of 
+                informing oneself through in-depth research and discussion. After taking the quiz, 
+                we encourage you to follow the links below in order to learn more about the major parties 
+                and their values.</p>
+            <div>
+                <a href="quiz.html" class="btn">Start Quiz</a>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="container" id="references">
+            <h2>Continue Informing Yourself</h2>
+            <br>
+            <h3><em>Offical Party Websites</em></h3>
+            <br><br>
+            <button onclick="location.href = 'https://liberal.ca/our-platform/';" id="Liberal" class="btn" >Liberal Party of Canada</a>
+                <button onclick="location.href = 'https://www.conservative.ca/';" id="Liberal" class="btn" >Conservative party of Canada</a>
+                <button onclick="location.href = 'https://www.ndp.ca/';" id="Liberal" class="btn" >New Democratic Party</a>
+                <button onclick="location.href = 'https://www.blocquebecois.org/';" id="Liberal" class="btn" >Bloc Quebecois</a>
+                <button onclick="location.href = 'https://www.greenparty.ca/en';" id="Liberal" class="btn" >Green Party of Canada</a>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>, Team name</p>
+    </footer>
+</body>
+
+</html>
