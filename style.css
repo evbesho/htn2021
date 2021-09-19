@@ -37,8 +37,15 @@ body {
     font-size: 30px;
     color: aliceblue;
     letter-spacing: 5px;
+    -webkit-transition: color .5s ease-out;
+  -moz-transition: color .5s ease-out;
+  -o-transition: color .5s ease-out;
+  transition: color .5s ease-out;
 }
-
+.logo a:hover{
+   color: blueviolet;
+   cursor: pointer;
+}
 .links {
     height: 100%;
     float: right;
@@ -62,6 +69,10 @@ body {
     text-decoration: none;
     color: white;
     padding: 1rem;
+    -webkit-transition: color .5s ease-out;
+  -moz-transition: color .5s ease-out;
+  -o-transition: color .5s ease-out;
+  transition: color .5s ease-out;
 }
 
 .links a:hover{
@@ -135,6 +146,14 @@ body {
     font-size: 70px;
     color: #ddd;
     text-transform: uppercase;
+    -webkit-transition: color .5s ease-out;
+    -moz-transition: color .5s ease-out;
+    -o-transition: color .5s ease-out;
+    transition: color .5s ease-out;
+}
+
+.main-area h1:hover{
+    color: greenyellow;
 }
 
 .responsive{
@@ -178,6 +197,5 @@ body {
 .btn:hover{
     background: #dadada;
     color: #ff0000;
-
-
+    cursor: pointer;
 }
