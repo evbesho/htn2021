@@ -1,30 +1,80 @@
 (function() {
+
+  var agreeance = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+  
   var questions = [{
     question: "Canada’s anti-hate speech laws infringe on free speech rights.",
-    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    choices: agreeance,
   }, {
     question: "There should be more federal regulations over what Canadians can say online.",
-    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    choices: agreeance,
   }, {
     question: "The federal government should be providing more financial relief to Canadians who lost their jobs during the pandemic.",
-    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    choices: agreeance,
   }, {
     question: "The government should provide Universal Basic Income to all Canadians.",
-    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    choices: agreeance,
   }, {
     question: "There should not be any new oil pipelines developed in Canada.",
-    choices: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+    choices: agreeance,
+  }, {
+    question: "Canada should do more to reduce its carbon footprint.",
+    choices: agreeance,
+  }, {
+    question: "Canadians should pay for their greenhouse gas emissions (i.e Carbon Tax).",
+    choices: agreeance,
+  }, {
+    question: "The federal government should make an effort to hire more visible minorities.",
+    choices: agreeance,
+  }, {
+    question: "Universal affordable childcare should be made available to Canadian families.",
+    choices: agreeance,
+  }, {
+    question: "Proof of COVID-19 vaccination should be required to go to restaurants, gyms, public events, etc.",
+    choices: agreeance,
+  }, {
+    question: "Universal Pharmacare should be available to all Canadians.",
+    choices: agreeance,
+  }, {
+    question: "Abortion services should be more accessible throughout Canada.",
+    choices: agreeance,
+  }, {
+    question: "Private healthcare should have a bigger role in the Canadian healthcare system.",
+    choices: agreeance,
+  }, {
+    question: "Canada should open its borders to more immigrants.",
+    choices: agreeance,
+  }, {
+    question: "Indigenous languages should be recognized as official languages.",
+    choices: agreeance,
+  }, {
+    question: "The possession of illicit drugs for personal use should be decriminalized.",
+    choices: agreeance,
+  }, {
+    question: "Funding for police services in Canada should be decreased.",
+    choices: agreeance,
+  }, {
+    question: "Quebec should become an independent country.",
+    choices: agreeance,
+  }, {
+    question: "Large corporations should pay more in taxes.",
+    choices: agreeance,
+  }, {
+    question: "Wealthier Canadians should pay more in taxes.",
+    choices: agreeance,
   }];
   
-  var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
-  var quiz = $('#quiz'); //Quiz div object
+  var questionsAnswered = 0; 
+  var userAnswers = []; 
+  var quiz = $('#quiz');
 
-  var lpc = [0,3,1,1,0];
-  var cpc = [3,0,0,0,0];
-  var ndp = [0,3,3,3,0];
-  var gpc = [0,3,3,3,0];
-  var bq = [0,2,1,3,0];
+  
+  // Party stances
+  var lpc = [0,4,2,1,1,3,3,4,4,3,3,4,2,3,2,1,2,0,3,3];
+  var cpc = [3,0,1,0,0,2,1,0,1,1,1,1,3,2,2,1,1,0,2,2];
+  var ndp = [0,4,3,4,4,4,2,4,4,3,4,4,0,4,4,4,2,1,4,4];
+  var gpc = [0,4,3,3,4,4,4,3,3,1,4,4,0,4,4,4,3,2,4,3];
+  var bq =  [0,2,2,1,4,4,3,1,2,1,3,4,1,2,4,3,2,4,4,3];
   
   // Display initial question
   displayNext();
@@ -40,10 +90,10 @@
     choose();
     
     // If no user selection, progress is stopped
-    if (isNaN(selections[questionCounter])) {
+    if (isNaN(userAnswers[questionsAnswered])) {
       alert('Please make a selection!');
     } else {
-      questionCounter++;
+      questionsAnswered++;
       displayNext();
     }
   });
@@ -56,7 +106,7 @@
       return false;
     }
     choose();
-    questionCounter--;
+    questionsAnswered--;
     displayNext();
   });
   
@@ -67,8 +117,8 @@
     if(quiz.is(':animated')) {
       return false;
     }
-    questionCounter = 0;
-    selections = [];
+    questionsAnswered = 0;
+    userAnswers = [];
     displayNext();
     $('#start').hide();
   });
@@ -117,7 +167,7 @@
   
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +$('input[name="answer"]:checked').val();
+    userAnswers[questionsAnswered] = +$('input[name="answer"]:checked').val();
   }
   
   // Displays next requested element
@@ -125,22 +175,22 @@
     quiz.fadeOut(function() {
       $('#question').remove();
       
-      if(questionCounter < questions.length){
-        var nextQuestion = createQuestionElement(questionCounter);
+      if(questionsAnswered < questions.length){
+        var nextQuestion = createQuestionElement(questionsAnswered);
         quiz.append(nextQuestion).fadeIn();
-        if (!(isNaN(selections[questionCounter]))) {
-          $('input[value='+selections[questionCounter]+']').prop('checked', true);
+        if (!(isNaN(userAnswers[questionsAnswered]))) {
+          $('input[value='+userAnswers[questionsAnswered]+']').prop('checked', true);
         }
         
         // Controls display of 'prev' button
-        if(questionCounter === 1){
+        if(questionsAnswered === 1){
           $('#prev').show();
-        } else if(questionCounter === 0){
+        } else if(questionsAnswered === 0){
           
           $('#prev').hide();
           $('#next').show();
         }
-      }else {
+      } else {
         var scoreElem = displayScore();
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
@@ -152,8 +202,8 @@
 
   function compareToParty(party) {
     var totalDistance = 0;
-    for (var i = 0; i < selections.length; i++) {
-      totalDistance += Math.abs(selections[i] - party[i])
+    for (var i = 0; i < userAnswers.length; i++) {
+      totalDistance += Math.abs(userAnswers[i] - party[i])
     }
     return totalDistance;
   }
@@ -163,15 +213,15 @@
     var score = $('<p>',{id: 'question'});
     
     var numCorrect = 0;
-    for (var i = 0; i < selections.length; i++) {
-      if (selections[i] === questions[i].correctAnswer) {
+    for (var i = 0; i < userAnswers.length; i++) {
+      if (userAnswers[i] === questions[i].correctAnswer) {
         numCorrect++;
       }
     }
 
     var largestDistance = 0;
-    for (var i = 0; i < selections.length; i++) {
-      largestDistance += (Math.abs(selections[i] - 2) + 2);
+    for (var i = 0; i < userAnswers.length; i++) {
+      largestDistance += (Math.abs(userAnswers[i] - 2) + 2);
     }
 
     var comparedLPC = (Math.round((1 - (compareToParty(lpc) / largestDistance)) * 100));
